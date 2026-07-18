@@ -1,37 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Family Codes - My Projects</title>
-    <meta name="description" content="Hi, my family codes and those are my projects.">
-    <meta name="keywords" content="family codes, family, codes, first project, prime empire, coding projects">
-    <meta name="author" content="Antek">
-    <link rel="canonical" href="https://family.codes">
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        img, iframe {
-            height: 400px;
-        }
-        iframe {
-            border: none;
-            width: 600px;
-            margin-bottom: 100px; /* Add some space below the iframe */
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>family.codes — small, private apps for families</title>
+  <meta name="description" content="family.codes builds small, private apps for families. First up: Mom Bux — chores that pay, on the Apple Watch.">
+  <meta name="author" content="family.codes">
+  <link rel="canonical" href="https://family.codes">
+  <link rel="stylesheet" href="/style.css">
+  <meta property="og:title" content="family.codes">
+  <meta property="og:description" content="Small, private apps for families.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://family.codes">
 </head>
 <body>
-    <img src="img/title.png" alt="My projects">
-    <iframe src="prime-empire.html"></iframe>
+  <div class="container">
+    <nav class="nav">
+      <a class="wordmark" href="/"><span class="dot"></span>family.codes</a>
+    </nav>
+
+    <header class="hero">
+      <p class="eyebrow">family.codes</p>
+      <h1 class="hero-title grad-accent">Small, private apps<br>for families.</h1>
+      <p class="lede">Thoughtful little tools that live on your own devices — no accounts, no ads, no tracking.</p>
+    </header>
+
+    <main>
+      <section class="apps" aria-label="Apps">
+        <a class="app-card" href="/mombux/">
+          <img class="app-icon" src="/img/mombux-icon.png" alt="Mom Bux app icon">
+          <div style="flex:1">
+            <h3>Mom Bux</h3>
+            <p class="app-tag">Chores that pay, on the Apple Watch.</p>
+            <p class="app-desc">Kids earn and spend a family reward currency right from their wrist; parents keep the books on their phone.</p>
+            <div class="row">
+              <span class="pill"><span class="dot"></span>Early access</span>
+              <span class="go" aria-hidden="true">→</span>
+            </div>
+          </div>
+        </a>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© family.codes</span>
+      <span class="sep">·</span>
+      <a href="mailto:family.codes@icloud.com">family.codes@icloud.com</a>
+      <span class="sep">·</span>
+      <a href="/antek/">Antek's projects</a>
+    </footer>
+  </div>
 </body>
 </html>
