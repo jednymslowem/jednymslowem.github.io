@@ -1,47 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antek's Projects — family.codes</title>
-    <meta name="description" content="Antek's coding projects, including Prime Empire.">
-    <meta name="keywords" content="family codes, family, codes, first project, prime empire, coding projects">
-    <meta name="author" content="Antek">
-    <link rel="canonical" href="https://family.codes/antek">
-    <style>
-        body {
-            background-color: black;
-            color: white;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            text-align: center;
-        }
-        img, iframe {
-            height: 400px;
-        }
-        iframe {
-            border: none;
-            width: 600px;
-            margin-bottom: 100px; /* Add some space below the iframe */
-        }
-        .back {
-            position: fixed;
-            top: 16px;
-            left: 20px;
-            color: #9a9aa0;
-            text-decoration: none;
-            font: 14px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        .back:hover { color: #fff; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antek makes stuff — family.codes</title>
+  <meta name="description" content="Games and stories by Antek. Play Prime Empire and read Moja Pierwsza Ksionszka.">
+  <meta name="author" content="Antek">
+  <link rel="canonical" href="https://family.codes/antek">
+  <link rel="stylesheet" href="/antek/style.css">
+  <meta property="og:title" content="Antek makes stuff">
+  <meta property="og:description" content="Games and stories by Antek.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://family.codes/antek">
 </head>
 <body>
-    <a class="back" href="/">← family.codes</a>
-    <img src="../img/title.png" alt="My projects">
-    <iframe src="prime-empire.html"></iframe>
+  <div class="container">
+    <nav class="nav">
+      <a class="wordmark" href="/"><span class="dot"></span>family.codes</a>
+      <span class="by">by antek</span>
+    </nav>
+
+    <header class="hero">
+      <h1>Antek<br>makes<br><em>stuff.</em></h1>
+      <p class="sub">Games · Stories · Whatever</p>
+    </header>
+
+    <main class="work">
+      <section class="piece" aria-labelledby="game-title">
+        <span class="label">01 / Game</span>
+        <div class="frame">
+          <iframe src="prime-empire.html" title="Prime Empire — a Scratch game by Antek" allowfullscreen loading="lazy"></iframe>
+        </div>
+        <h2 id="game-title">Prime Empire</h2>
+        <p class="blurb">Ninjas get trapped inside a video game and have to fight their way out, which is a completely reasonable thing to happen on a Tuesday.</p>
+        <p class="meta">Made in Scratch · Click the flag to start</p>
+      </section>
+
+      <section class="piece" aria-labelledby="story-title">
+        <span class="label">02 / Story</span>
+        <button class="story-card" type="button" data-open-story aria-haspopup="dialog">
+          <h2 id="story-title">Moja Pierwsza Ksionszka</h2>
+          <p class="blurb">Toilet Land declares war on Kitchen Land because someone drove a truck over the royal backyard. There is an atomic bomb made of fruit punch.</p>
+          <p class="meta">3 chapters · numbered 1, 2 and 4</p>
+          <span class="cta">Read it <span class="arrow" aria-hidden="true">→</span></span>
+        </button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© family.codes</span>
+      <span class="sep">·</span>
+      <a href="/">All apps</a>
+    </footer>
+  </div>
+
+  <dialog class="reader" id="reader" aria-labelledby="reader-title">
+    <div class="reader-bar">
+      <span class="title" id="reader-title">Moja Pierwsza Ksionszka</span>
+      <button class="close" type="button" data-close-story aria-label="Close story">✕</button>
+      <div class="progress" id="progress"></div>
+    </div>
+
+    <div class="reader-body" id="reader-body">
+      <article class="story">
+        <h2 class="story-title">Moja Pierwsza Ksionszka</h2>
+        <p class="byline">A story by Antek</p>
+
+        <h3>Chapter 1</h3>
+        <p>Mr.poo (aka:king of toilet land) had just cleaned his royal backyard when suddenly a giant truck rolled over it. “Nooooooooooooooooo!” screamed Mr.poo.</p>
+        <p>“Sowwy” said the truck driver.</p>
+        <p>“You better be!” shouted Mr.poo.</p>
+        <p>“Should I clean it up?”.</p>
+        <p>“No way it's MY royal garden not yours!” said Mr.poo “ by the way who are you?”</p>
+        <p>“I’m the king of kitchen land.” said the truck driver who apparently was a king. For the first time Mr.poo saw that the truck driver was a piece of ham wearing a crown made out of carrots. You see toilet land and kitchen land are long time enemies because of a war that happened 1,000,000,000 years ago. So now you are thinking why the king of kitchen land was in toilet land. “Oh and by the way.” said the king of kitchen land “my name is Hammy.”</p>
+        <p>“I Don't care what your name is!” screamed Mr.poo “Just get out of here!”. So Hammy went back to kitchen land. In kitchen land Hammy said that their peace offering didn't work out because he accidentally rolled the truck over Mr.poo’s backyard. You could literally feel the disappointment. Meanwhile Mr.poo said that he declared war on kitchen land. The crowd cheered with agreement as their king continued to talk. You see, toilet land is not as friendly as kitchen land so a war is okay with everyone in toilet land. The next day Mr.poo went to kitchen land. Mr.poo realised that walking was not such a good idea. First he had to cross the doors of toilet land. (aka:the door to the bathroom). They were guarded by the mighty roll of toilet paper. To get past him you had to answer a riddle.</p>
+        <p>As Mr.poo approached the booming voice of the mighty toilet paper said: “who are you”</p>
+        <p>“I am the kind of toilet land and I'm trying to pass your doors.” said Mr.poo</p>
+        <p>“And what makes you think you can do that just like that?”said the mighty roll of toilet paper “you need to answer my riddle first.”</p>
+        <p>“And I will o mighty roll of toilet paper” said Mr.poo</p>
+        <p>“Good, here is my riddle.” said the mighty roll of toilet paper “what are the 3 states of matter?”</p>
+        <p>“poo(solid) ,pee(liquid) ,and fart(gas).” said Mr.poo.</p>
+        <p>“Very good, you may pass.” said the mighty roll of toilet paper.</p>
+        <p>“Thank You very much.” said Mr.poo. As he passed the doors he saw another challenge that's gonna make his walk to kitchen land even longer. A pack of dino chicken nuggets had crossed his path to kitchen land. The dino nuggets were really smart and dangerous, but Mr.poo was also smart. He took out his sword and dropped to his knees. The sword clattered as it fell to the ground. Of course the dino nuggets thought he surrendered so they left him alone. Mr.poo knew that they would be back so he attacked them with his sword. The dino nuggets who were taken by surprise had no time to defend themselves and they were slain by Mr.poo. So Mr.poo got to continue his journey. 4 hours later he got to kitchen land, and as soon as he got there everyone hid in their houses. Mr.poo headed straight for the castle where he met Hammy. “Good day Mr.poo.” said Hammy.</p>
+        <p>“Hello.” said Mr.poo “I officially declare a war on your town.”</p>
+        <p>Everyone in the throne room gasped. “Why a war?” asked Hammy.</p>
+        <p>“Because you rolled over my garden, duh!” shouted Mr.poo.</p>
+        <p>“You know that we have the fruit punch (fruit punch is also known as an atomic bomb).” said Hammy “You’ll lose for shure.”</p>
+        <p>“No we will not, I didn't come here alone.”</p>
+        <p>“What do you mean?”</p>
+        <p>“I came here with a team of volunteers that stole your fruit punch!” said Mr.poo.</p>
+
+        <h3>Chapter 2</h3>
+        <p>Everyone in the throne room gasped (again). Hammy knew that he was in big trouble. If toilet land got their hands on the fruit punch, kitchen land is doomed. “I will not go to war!” Said Hammy.</p>
+        <p>“Too bad, I already signed the contract.” said Mr.poo as he showed him the contract.</p>
+        <p>“Oh-oh.”</p>
+        <p>“Oh, yeah.”</p>
+        <p>“Well then give us some time to prepare!” said Hammy.</p>
+        <p>“Ok, But only because it says so in the contract.” said Mr.poo.</p>
+        <p>“Ok, now go back to toilet land.”</p>
+        <p>“Ok, bye.”</p>
+        <p>When Mr.poo left, Hammy declared a meeting. “We have to go to war with toilet land!” he said. A hand rose in the crowd. “Yes?” Hammy asked.</p>
+        <p>“But why?” Asked the person in the crowd.</p>
+        <p>“Because the king of toilet land signed a contract that says so!” said Hammy.</p>
+        <p>“Oh.” Said the person in the crowd “ But we have the fruit punch, they will lose for shure.</p>
+        <p>“Oh, there's this thing…”</p>
+        <p>“Yes?”</p>
+        <p>“They stole it from us.”</p>
+        <p>“WHAT!” the crowd shouted in disbelief.</p>
+        <p>“I know, but we can't give up.” Said Hammy “We must fight till the end!”</p>
+        <p>“YEAH!” shouted the crowd. So that's how kitchen land started the war. Meanwhile in toilet land… “The war has begun!” Shouted Mr.poo.</p>
+        <p>“YAY!” Shouted the crowd. This is how toilet land started the war.</p>
+        <p>1 Month later…</p>
+        <p>The 2 armies started to walk their long journey to a battlefield. When kitchen land got to the battlefield they waited 7 days for the toilet land army to arrive. As soon as toilet land saw the kitchen land army they opened fire but were attacked by a 100 dino chicken nuggets. 3 toilet land troops were badly hurt but none of them died plus all of the dino chicken nuggets were slain. But as soon as the dino nuggets were slain the toilet land realised that that the dino nuggets were just a distraction. 9 bombs were dropped on the toilet land army. It looked like kitchen land was winning. Hammy knew that he had to be careful because toilet land could use the fruit punch any second. So their next attack was to fire 3 rocket blasters which had 3 bombs attached, each. The explosion was massive, some of the fire even the kitchen land army. But then they realised that the fire close to them wasn't from the explosion at all. The toilet land army was smart enough to spray oil around the kitchen land army and set it on fire. That way if the kitchen land army fired any missiles they would explode as soon as they reached the fire. That was a big win for the toilet land army.</p>
+        <p>2 days later…</p>
+        <p>The kitchen land army figured out that they could just pack their bags and move to another spot. The fire was no longer a problem. The war went on and on and on and on…</p>
+        <p>5 years later…</p>
+        <p>Hammy told a messenger to go tell Mr.poo that he wanted to meet him in the middle of the battlefield. Hammy waited for Mr.poo for 1 hour. “So why did you want to talk to me?” Asked Mr.poo.</p>
+        <p>“I wanted to tell you that the war is really boring the same things happen all over again and again” Said Hammy</p>
+        <p>“Ok, I’ll make it interesting all right.” Said Mr.poo “By firing the fruit punch at kitchen land!”</p>
+
+        <h3>Chapter 4</h3>
+        <p>Everyone gasped. “When are you gonna fire it?” Asked Hammy.</p>
+        <p>“As soon as I get back to my army camp, duh.” Said Mr.poo.</p>
+        <p>“Aw man.” said Hammy. “At least let us evacuate the city.”</p>
+        <p>“Um, no.”</p>
+        <p>“Please?”</p>
+        <p>“No.”</p>
+        <p>“Pleeeeeeeeeeeease?”</p>
+        <p>“NO!”</p>
+        <p>“Dam.”</p>
+        <p>“Ok, I’ll give you 10 minutes after I get to camp.”</p>
+        <p>“Thank you.”</p>
+        <p>“Better get moving then!” Shouted Mr.poo.</p>
+        <p>70 minutes later</p>
+        <p>“Listen up kitchen land!” shouted Mr.poo using a megaphone. “I’m firing the fruit punch at you, right now!” Kitchen land reacted in (you guessed it) panic. Luckily everyone evacuated safely. After a minute or so you could see the fruit punch coming their way. Hammy felt like he had to do something to stop the fruit punch. Mr.noodles please slingshot me straight at the fruit punch, please. Said Hammy.</p>
+        <p>“But then you will die!” Said Mr.noodles.</p>
+        <p>“I’m Ham, I can get cooked.”</p>
+        <p>“Oh yeah.”</p>
+        <p>“So can you do it?”</p>
+        <p>“Yes.”</p>
+        <p>“Thank you.”</p>
+        <p>So 1 minute later Hammy and 1000 bombs were sling shot at the fruit punch. “I should have thought this through.” Said Hammy.</p>
+        <p>When he got to the fruit punch he quickly taped the 1000 bombs to the fruit punch and let go. In midair he released his parachute. When he landed and looked up he could see the fruit punch for a second and in the next an explosion took its place. The explosion  was so big that the sky turned red at every place that Hammy could see. After that celebrations were held for weeks to honour Hammy.</p>
+
+        <p class="end">The End</p>
+      </article>
+    </div>
+  </dialog>
+
+  <script>
+    const reader = document.getElementById('reader');
+    const readerBody = document.getElementById('reader-body');
+    const progress = document.getElementById('progress');
+
+    const open = () => {
+      reader.showModal();
+      document.documentElement.classList.add('is-locked');
+      readerBody.scrollTop = 0;
+      updateProgress();
+    };
+
+    const close = () => {
+      reader.close();
+    };
+
+    // Runs for every close path: button, Esc, and backdrop.
+    reader.addEventListener('close', () => {
+      document.documentElement.classList.remove('is-locked');
+    });
+
+    document.querySelectorAll('[data-open-story]').forEach((el) => el.addEventListener('click', open));
+    document.querySelectorAll('[data-close-story]').forEach((el) => el.addEventListener('click', close));
+
+    // The dialog element itself fills the viewport, so a click that lands on it
+    // rather than on its children is a click on the backdrop area.
+    reader.addEventListener('click', (e) => {
+      if (e.target === reader) close();
+    });
+
+    function updateProgress() {
+      const scrollable = readerBody.scrollHeight - readerBody.clientHeight;
+      const ratio = scrollable > 0 ? readerBody.scrollTop / scrollable : 0;
+      progress.style.width = (ratio * 100) + '%';
+    }
+    readerBody.addEventListener('scroll', updateProgress, { passive: true });
+  </script>
 </body>
 </html>
