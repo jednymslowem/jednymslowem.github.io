@@ -135,6 +135,43 @@ a { color: inherit; text-decoration: none; }
 .story-card .cta .arrow { transition: transform .2s var(--ease); }
 .story-card:hover .cta .arrow { transform: translateX(4px); }
 
+/* ---------- Comic card ---------- */
+.comic-card {
+  display: flex;
+  gap: clamp(20px, 4vw, 34px);
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  padding: clamp(20px, 3.2vw, 28px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.comic-card:hover { transform: translateY(-3px); border-color: var(--border-strong); box-shadow: 0 0 60px var(--glow); }
+.comic-card:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.comic-card .cover {
+  flex: none;
+  width: clamp(110px, 22vw, 176px);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #000;
+  box-shadow: 0 12px 34px rgba(0, 0, 0, 0.45);
+}
+.comic-card .cover img { display: block; width: 100%; height: auto; }
+.comic-card .comic-text { display: block; }
+.comic-card .cta {
+  display: inline-flex; align-items: center; gap: 9px;
+  margin-top: 20px;
+  font: 600 14px/1 var(--sans);
+  color: var(--accent);
+}
+.comic-card .cta .arrow { transition: transform .2s var(--ease); }
+.comic-card:hover .cta .arrow { transform: translateX(4px); }
+
 /* ---------- Footer ---------- */
 .footer {
   border-top: 1px solid var(--border);
@@ -172,7 +209,8 @@ a { color: inherit; text-decoration: none; }
   background: var(--bg);
 }
 .reader-bar .title { font: 600 12px/1 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint); }
-.reader-bar .close {
+.reader-bar .close,
+.viewer-bar .close {
   flex: none;
   width: 34px; height: 34px;
   display: grid; place-items: center;
@@ -184,7 +222,8 @@ a { color: inherit; text-decoration: none; }
   cursor: pointer;
   transition: color .2s var(--ease), border-color .2s var(--ease);
 }
-.reader-bar .close:hover { color: var(--ink); border-color: var(--border-strong); }
+.reader-bar .close:hover,
+.viewer-bar .close:hover { color: var(--ink); border-color: var(--border-strong); }
 
 /* Reading progress, pinned to the bottom edge of the bar. */
 .progress {
@@ -223,8 +262,118 @@ a { color: inherit; text-decoration: none; }
   text-align: center;
 }
 
+/* ---------- Comic viewer modal ---------- */
+.viewer {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+}
+.viewer::backdrop { background: rgba(5, 5, 8, 0.86); backdrop-filter: blur(6px); }
+.viewer[open] { display: flex; flex-direction: column; }
+
+.viewer-bar {
+  position: relative;
+  flex: none;
+  display: flex; align-items: center; gap: 16px;
+  padding: 15px clamp(16px, 3vw, 28px);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.viewer-bar .title {
+  flex: 1;
+  min-width: 0;
+  font: 600 12px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--faint);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.viewer-bar .counter {
+  flex: none;
+  font: 600 12px/1 var(--mono);
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+/* The stage owns all remaining height so a page can size itself to fit
+   without ever scrolling. min-height:0 lets it shrink inside the flex column,
+   and .pages is inset-positioned so its height is definite — which is what
+   makes the page's percentage max-height actually resolve. */
+.viewer-stage {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+.viewer-stage .pages {
+  position: absolute;
+  inset: clamp(10px, 2vw, 22px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.viewer-stage .page {
+  display: none;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.viewer-stage .page.is-current { display: block; }
+
+/* Full-height hit zones so tapping either side of the page turns it. */
+.page-nav {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: clamp(64px, 18%, 200px);
+  display: flex; align-items: center;
+  padding: 0 clamp(10px, 2vw, 22px);
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.page-nav.prev { left: 0; justify-content: flex-start; }
+.page-nav.next { right: 0; justify-content: flex-end; }
+.page-nav .chip {
+  width: 46px; height: 46px;
+  display: grid; place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(19, 19, 23, 0.82);
+  backdrop-filter: blur(8px);
+  color: var(--muted);
+  font-size: 26px; line-height: 1;
+  transition: color .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.page-nav:hover .chip { color: var(--ink); border-color: var(--border-strong); transform: scale(1.06); }
+.page-nav:focus-visible { outline: 0; }
+.page-nav:focus-visible .chip { outline: 2px solid var(--accent); outline-offset: 3px; color: var(--ink); }
+.page-nav:disabled { cursor: default; }
+.page-nav:disabled .chip { opacity: 0.22; transform: none; }
+
 @media (max-width: 720px) {
   .reader { width: 100%; margin: 0; }
+
+  .comic-card { gap: 18px; }
+  .comic-card .cta { margin-top: 16px; }
+
+  .viewer-stage { padding: 10px; }
+  .page-nav { width: 22%; padding: 0 8px; }
+  .page-nav .chip { width: 38px; height: 38px; font-size: 22px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

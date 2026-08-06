@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Antek makes stuff — family.codes</title>
-  <meta name="description" content="Games and stories by Antek. Play Prime Empire and read Moja Pierwsza Ksionszka.">
+  <meta name="description" content="Games, stories and comics by Antek. Play Prime Empire, read Moja Pierwsza Ksionszka and Detective Taco.">
   <meta name="author" content="Antek">
   <link rel="canonical" href="https://family.codes/antek">
   <link rel="stylesheet" href="/antek/style.css">
   <meta property="og:title" content="Antek makes stuff">
-  <meta property="og:description" content="Games and stories by Antek.">
+  <meta property="og:description" content="Games, stories and comics by Antek.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://family.codes/antek">
 </head>
@@ -22,7 +22,7 @@
 
     <header class="hero">
       <h1>Antek<br>makes<br><em>stuff.</em></h1>
-      <p class="sub">Games · Stories · Whatever</p>
+      <p class="sub">Games · Stories · Comics · Whatever</p>
     </header>
 
     <main class="work">
@@ -43,6 +43,21 @@
           <p class="blurb">Toilet Land declares war on Kitchen Land because someone drove a truck over the royal backyard. There is an atomic bomb made of fruit punch.</p>
           <p class="meta">3 chapters · numbered 1, 2 and 4</p>
           <span class="cta">Read it <span class="arrow" aria-hidden="true">→</span></span>
+        </button>
+      </section>
+
+      <section class="piece" aria-labelledby="comic-title">
+        <span class="label">03 / Comic</span>
+        <button class="comic-card" type="button" data-open-comic aria-haspopup="dialog">
+          <span class="cover">
+            <img src="comic/cover.jpg" alt="Detective Taco cover — a taco-headed detective in a suit holding a giant red key" width="800" height="1151" loading="lazy" decoding="async">
+          </span>
+          <span class="comic-text">
+            <h2 id="comic-title">Detective Taco</h2>
+            <p class="blurb">An evil robot (clue: it's evil) crash-lands looking for a big fat evil snake. Six keys can lock the snake up, five bosses are in the way, and the only one on the case is a taco in a suit.</p>
+            <p class="meta">17 pages · Drawn by hand</p>
+            <span class="cta">Read it <span class="arrow" aria-hidden="true">→</span></span>
+          </span>
         </button>
       </section>
     </main>
@@ -148,6 +163,25 @@
     </div>
   </dialog>
 
+  <dialog class="viewer" id="viewer" aria-labelledby="viewer-title">
+    <div class="viewer-bar">
+      <span class="title" id="viewer-title">Detective Taco</span>
+      <span class="counter"><span id="viewer-count">1 / 17</span></span>
+      <button class="close" type="button" data-close-comic aria-label="Close comic">✕</button>
+      <div class="progress" id="viewer-progress"></div>
+    </div>
+
+    <div class="viewer-stage">
+      <div class="pages" id="viewer-pages" aria-live="polite"></div>
+      <button class="page-nav prev" type="button" data-page-step="-1" aria-label="Previous page">
+        <span class="chip" aria-hidden="true">‹</span>
+      </button>
+      <button class="page-nav next" type="button" data-page-step="1" aria-label="Next page">
+        <span class="chip" aria-hidden="true">›</span>
+      </button>
+    </div>
+  </dialog>
+
   <script>
     const reader = document.getElementById('reader');
     const readerBody = document.getElementById('reader-body');
@@ -184,6 +218,102 @@
       progress.style.width = (ratio * 100) + '%';
     }
     readerBody.addEventListener('scroll', updateProgress, { passive: true });
+  </script>
+
+  <script>
+    // ---------- Comic viewer: one page at a time ----------
+    const PAGE_COUNT = 17;
+
+    const viewer = document.getElementById('viewer');
+    const pagesEl = document.getElementById('viewer-pages');
+    const countEl = document.getElementById('viewer-count');
+    const viewerProgress = document.getElementById('viewer-progress');
+    const prevBtn = viewer.querySelector('.page-nav.prev');
+    const nextBtn = viewer.querySelector('.page-nav.next');
+
+    // Pages carry their URL in data-src and only get a real src when they are
+    // the current page or a neighbour, so opening the comic fetches ~1 page,
+    // not all 17.
+    const pageEls = Array.from({ length: PAGE_COUNT }, (_, i) => {
+      const img = document.createElement('img');
+      img.className = 'page';
+      img.dataset.src = 'comic/' + String(i + 1).padStart(2, '0') + '.jpg';
+      img.alt = 'Detective Taco, page ' + (i + 1);
+      img.decoding = 'async';
+      img.draggable = false;
+      pagesEl.append(img);
+      return img;
+    });
+
+    let current = 0;
+
+    const load = (i) => {
+      const img = pageEls[i];
+      if (img && !img.src) img.src = img.dataset.src;
+    };
+
+    function show(i) {
+      current = Math.min(Math.max(i, 0), PAGE_COUNT - 1);
+
+      pageEls.forEach((img, n) => img.classList.toggle('is-current', n === current));
+      [current - 1, current, current + 1].forEach(load);
+
+      countEl.textContent = (current + 1) + ' / ' + PAGE_COUNT;
+      viewerProgress.style.width = ((current + 1) / PAGE_COUNT * 100) + '%';
+      prevBtn.disabled = current === 0;
+      nextBtn.disabled = current === PAGE_COUNT - 1;
+    }
+
+    const step = (delta) => show(current + delta);
+
+    const openComic = () => {
+      viewer.showModal();
+      document.documentElement.classList.add('is-locked');
+      show(0);
+    };
+
+    document.querySelectorAll('[data-open-comic]').forEach((el) => el.addEventListener('click', openComic));
+    document.querySelectorAll('[data-close-comic]').forEach((el) => el.addEventListener('click', () => viewer.close()));
+    viewer.querySelectorAll('[data-page-step]').forEach((el) => {
+      el.addEventListener('click', () => step(Number(el.dataset.pageStep)));
+    });
+
+    viewer.addEventListener('close', () => {
+      document.documentElement.classList.remove('is-locked');
+    });
+
+    // Esc is handled by <dialog> itself; these are the paging keys. Space only
+    // pages when it isn't about to activate a focused button.
+    viewer.addEventListener('keydown', (e) => {
+      const keys = { ArrowLeft: -1, PageUp: -1, ArrowRight: 1, PageDown: 1 };
+      if (e.key === ' ' && !(e.target instanceof HTMLButtonElement)) keys[' '] = 1;
+
+      if (e.key in keys) {
+        e.preventDefault();
+        step(keys[e.key]);
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        show(0);
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        show(PAGE_COUNT - 1);
+      }
+    });
+
+    // Swipe left/right on touch. Ignores mostly-vertical drags.
+    let touchX = null;
+    let touchY = null;
+    pagesEl.addEventListener('touchstart', (e) => {
+      touchX = e.changedTouches[0].clientX;
+      touchY = e.changedTouches[0].clientY;
+    }, { passive: true });
+    pagesEl.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      const dy = e.changedTouches[0].clientY - touchY;
+      touchX = null;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+    }, { passive: true });
   </script>
 </body>
 </html>
